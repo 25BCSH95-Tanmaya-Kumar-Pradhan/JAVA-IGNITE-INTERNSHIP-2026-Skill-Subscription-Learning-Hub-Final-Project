@@ -34,7 +34,9 @@ public class SkillPack {
     // =========================
     // GETTERS AND SETTERS
     // =========================
-
+    public SkillPack() {
+     
+    }
     public Long getId() {
         return id;
     }
