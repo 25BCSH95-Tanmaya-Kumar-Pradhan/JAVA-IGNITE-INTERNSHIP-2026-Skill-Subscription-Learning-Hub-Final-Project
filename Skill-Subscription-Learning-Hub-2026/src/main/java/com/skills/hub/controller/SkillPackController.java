@@ -55,7 +55,11 @@ public class SkillPackController {
         return "redirect:/packs";
     }
 
-    public SkillPackService getPackService() {
-        return packService;
+    @PostMapping("/update-pack")
+    public String updatePack(@ModelAttribute SkillPack pack) {
+
+        packService.updateSkillPack(pack);
+
+        return "redirect:/packs";
     }
 }
