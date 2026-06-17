@@ -87,7 +87,7 @@ User - logs in -views packs - selects a plan
 
 			<br>
             <!-- subscribe action -->
-            <a href="/subscribe?userId=1&packId=${pack.id}">
+            <a href="/subscribe?packId=${pack.id}">
                 Subscribe
             </a>
 
