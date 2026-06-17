@@ -1,9 +1,14 @@
 package com.skills.hub.controller;
 
+import com.skills.hub.model.User;
 import com.skills.hub.service.SubscriptionService;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 @Controller
 public class SubscriptionController {
@@ -15,6 +20,20 @@ public class SubscriptionController {
     }
 
     @GetMapping("/subscribe")
+    public String subscribe(@RequestParam Long packId,
+                            HttpSession session) {
+
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        subscriptionService.subscribe(user.getId(), packId);
+
+        return "redirect:/subscriptions/" + user.getId();
+    }
+   /* @GetMapping("/subscribe")
     public String subscribe(@RequestParam Long userId,
                             @RequestParam Long packId) {
 
@@ -23,7 +42,7 @@ public class SubscriptionController {
 
         
         return "redirect:/subscriptions/" + userId;
-    }
+    }*/
 
     @GetMapping("/subscriptions/{userId}")
     public String viewSubscriptions(@PathVariable Long userId,
@@ -34,11 +53,10 @@ public class SubscriptionController {
         
         model.addAttribute("subs", list);
 
-        
+        model.addAttribute("count", list.size());
         return "subscriptions";
     }
 
     public SubscriptionService getSubscriptionService() {
         return subscriptionService;
     }
-}
