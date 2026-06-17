@@ -58,7 +58,15 @@
 
 
 </table>
+<br><br>
+<a href="/packs">
+    <button>Back to Skill Packs</button>
+</a>
 
+&nbsp;&nbsp;
+<a href="/logout">
+    <button>Logout</button>
+</a>
 
 </body>
 </html>
