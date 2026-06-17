@@ -32,7 +32,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     public Subscription subscribe(Long userId, Long packId) {
+        Subscription existing =
+    			subRepo.findByUserIdAndSkillPackId(userId, packId);
 
+    	if (existing != null) {
+    		return existing;   // or return null, depending on how your code is structured
         //fetch user
         User user = userRepo.findById(userId).orElse(null);
 
