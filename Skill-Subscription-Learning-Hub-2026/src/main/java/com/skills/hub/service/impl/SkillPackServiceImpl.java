@@ -31,8 +31,12 @@ public class SkillPackServiceImpl implements SkillPackService {
 
     @Override
     public SkillPack updateSkillPack(SkillPack pack) {
-    	//used to update user's pack by checking their Id
+
+        System.out.println("Service Called");
+        System.out.println(pack.getId());
+
         if (!packRepo.existsById(pack.getId())) {
+            System.out.println("Pack not found!");
             return null;
         }
 
