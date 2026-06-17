@@ -33,6 +33,7 @@ User - logs in -views packs - selects a plan
     <h2>Available Skill Packs</h2>
 	<a href="/login">
 	    <button>Login</button>
+		</a>
 </div>
 
 <div class="container">
@@ -54,7 +55,37 @@ User - logs in -views packs - selects a plan
             <b>₹ ${pack.price}</b>
 
             <br><br>
+			<!-- Update Pack -->
+			<form action="/update-pack" method="post">
 
+			    <input type="hidden" 
+			           name="id" 
+			           value="${pack.id}">
+
+
+			    <input type="text" 
+			           name="title" 
+			           value="${pack.title}">
+
+
+			    <input type="text" 
+			           name="description" 
+			           value="${pack.description}">
+
+
+			    <input type="text" 
+			           name="price" 
+			           value="${pack.price}">
+
+
+			    <button type="submit">
+			        Update
+			    </button>
+
+			</form>
+
+
+			<br>
             <!-- subscribe action -->
             <a href="/subscribe?userId=1&packId=${pack.id}">
                 Subscribe
