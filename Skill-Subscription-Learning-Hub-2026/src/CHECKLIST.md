@@ -8,7 +8,7 @@
 ## Skill Pack Module
 - [✅] Add pack
 - [✅] View packs
-- [ ] Update pack
+- [✅] Update pack
 - [✅] Delete pack
 
 ## Subscription Module
