@@ -52,7 +52,19 @@ User - logs in -views packs - selects a plan
 <div class="container">
 
     <h3>All Courses</h3>
-	
+	<form action="/packs" method="get">
+
+	    <input type="text"
+	           name="keyword"
+	           placeholder="Search Skill Pack">
+
+	    <button type="submit">
+	        Search
+	    </button>
+
+	</form>
+
+	<br>
     <!--  loop skill packs -->
     <c:forEach var="pack" items="${packs}">
 
