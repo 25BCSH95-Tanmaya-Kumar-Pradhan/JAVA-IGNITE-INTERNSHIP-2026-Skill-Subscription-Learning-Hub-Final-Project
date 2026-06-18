@@ -78,9 +78,9 @@ User - logs in -views packs - selects a plan
 			           value="${pack.price}">
 
 
-			   <button type="button" onclick="checkRole()">
+			    <button type="button" onclick="checkRole(this)">
 			       Update
-			   </button>
+				</button>
 
 
 			</form>
@@ -99,7 +99,7 @@ User - logs in -views packs - selects a plan
 </div>
 <script>
 
-function checkRole(){
+function checkRole(button){
 
     let role = prompt("Enter role (admin/user):");
 
@@ -108,10 +108,14 @@ function checkRole(){
         let pin = prompt("Enter Admin PIN:");
 
         if(pin === "1234"){
-            document.querySelector("form").submit();
+
+            button.closest("form").submit();
+
         }
         else{
+
             alert("Wrong PIN");
+
         }
 
     }
@@ -129,6 +133,5 @@ function checkRole(){
 }
 
 </script>
-
 </body>
 </html>
