@@ -7,6 +7,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -29,15 +30,17 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute User user) {
+    public String registerUser(@ModelAttribute User user,
+                               Model model) {
 
-        
         User savedUser = userService.registerUser(user);
 
-        
-        if (savedUser != null) {
+        if(savedUser != null) {
             return "redirect:/login";
         }
+
+        model.addAttribute("error",
+            "Name or Email is already in use!");
 
         return "register";
     }
