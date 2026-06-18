@@ -17,19 +17,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public User registerUser(User user) {
 
-        //Checking if email already exists
-        User existingUser = userRepo.findByEmail(user.getEmail());
+        // Check if email already exists
+        User existingEmail = userRepo.findByEmail(user.getEmail());
 
-        //If exists, stop process
-        if (existingUser != null) {
+        if (existingEmail != null) {
             return null;
         }
 
-        //Else Save user to DB
-        User savedUser = userRepo.save(user);
+        // Check if name already exists
+        User existingName = userRepo.findByName(user.getName());
 
-        //Then return saved user
-        return savedUser;
+        if (existingName != null) {
+            return null;
+        }
+
+        // Save user
+        return userRepo.save(user);
     }
 
     @Override
