@@ -90,9 +90,21 @@ User - logs in -views packs - selects a plan
 			<br>
 
 			<c:if test="${not empty loggedInUser}">
-			    <a href="/subscribe?packId=${pack.id}">
-			        Subscribe
-			    </a>
+				<c:choose>
+
+				    <c:when test="${subscribedPackIds.contains(pack.id)}">
+				        <span style="color:green;">
+				            Already Subscribed ✅
+				        </span>
+				    </c:when>
+
+				    <c:otherwise>
+				        <a href="/subscribe?packId=${pack.id}">
+				            Subscribe
+				        </a>
+				    </c:otherwise>
+
+				</c:choose>
 			</c:if>
 
 			<c:if test="${empty loggedInUser}">
