@@ -29,4 +29,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // Custom query method
     // Used for login validation
     User findByEmail(String email);
+    User findByName(String name);
 }
