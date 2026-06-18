@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@SuppressWarnings("unused")
 @Controller
 public class SkillPackController {
 
@@ -31,10 +31,18 @@ public class SkillPackController {
     }
 
     @GetMapping("/packs")
-    public String viewPacks(Model model,
-                            HttpSession session) {
+    public String viewPacks(
+            @RequestParam(required = false) String keyword,
+            Model model,
+            HttpSession session) {
 
-        var list = packService.getAllPacks();
+        List<SkillPack> list;
+
+        if (keyword != null && !keyword.isBlank()) {
+            list = packService.searchPacks(keyword);
+        } else {
+            list = packService.getAllPacks();
+        }
 
         model.addAttribute("packs", list);
 
