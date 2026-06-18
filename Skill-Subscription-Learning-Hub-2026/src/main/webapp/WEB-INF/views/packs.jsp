@@ -32,9 +32,21 @@ User - logs in -views packs - selects a plan
     <img src="/images/logo.png">
     <h2>Available Skill Packs</h2>
 	<p>Logged in as: <b>${loggedInUser.name}</b></p>
-	<a href="/login">
-	    <button>Login</button>
-		</a>
+	<c:choose>
+
+	        <c:when test="${not empty loggedInUser}">
+	            <a href="/logout">
+	                <button>Logout</button>
+	            </a>
+	        </c:when>
+
+	        <c:otherwise>
+	            <a href="/login">
+	                <button>Login</button>
+	            </a>
+	        </c:otherwise>
+
+	    </c:choose>
 </div>
 
 <div class="container">
