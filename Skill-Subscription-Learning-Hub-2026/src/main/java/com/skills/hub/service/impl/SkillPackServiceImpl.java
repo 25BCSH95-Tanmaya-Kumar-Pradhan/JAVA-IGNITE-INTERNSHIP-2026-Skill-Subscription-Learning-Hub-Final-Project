@@ -48,6 +48,13 @@ public class SkillPackServiceImpl implements SkillPackService {
     	//it deletes the users pack by taking user id
         packRepo.deleteById(id);
     }
+    
+    @Override
+    public List<SkillPack> searchPacks(String keyword) {
+
+        return packRepo.findByTitleContainingIgnoreCase(keyword);
+
+    }
 
     public SkillPackRepository getPackRepo() {
         return packRepo;
