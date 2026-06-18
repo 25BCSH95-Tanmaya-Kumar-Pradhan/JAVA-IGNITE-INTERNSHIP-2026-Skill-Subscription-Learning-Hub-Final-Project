@@ -31,6 +31,7 @@ User - logs in -views packs - selects a plan
 <div class="header">
     <img src="/images/logo.png">
     <h2>Available Skill Packs</h2>
+	<p>Logged in as: <b>${loggedInUser.name}</b></p>
 	<a href="/login">
 	    <button>Login</button>
 		</a>
@@ -39,7 +40,7 @@ User - logs in -views packs - selects a plan
 <div class="container">
 
     <h3>All Courses</h3>
-
+	
     <!--  loop skill packs -->
     <c:forEach var="pack" items="${packs}">
 
@@ -85,12 +86,20 @@ User - logs in -views packs - selects a plan
 
 			</form>
 
-
+			<!-- Subscribe Action -->
 			<br>
-            <!-- subscribe action -->
-            <a href="/subscribe?packId=${pack.id}">
-                Subscribe
-            </a>
+
+			<c:if test="${not empty loggedInUser}">
+			    <a href="/subscribe?packId=${pack.id}">
+			        Subscribe
+			    </a>
+			</c:if>
+
+			<c:if test="${empty loggedInUser}">
+			    <a href="/login">
+			        Login to Subscribe
+			    </a>
+			</c:if>
 
         </div>
 
