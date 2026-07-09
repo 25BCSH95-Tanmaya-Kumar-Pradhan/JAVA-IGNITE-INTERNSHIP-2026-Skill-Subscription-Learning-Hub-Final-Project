@@ -4,6 +4,7 @@ import com.skills.hub.model.SkillPack;
 import com.skills.hub.repository.SkillPackRepository;
 import com.skills.hub.service.SkillPackService;
 import org.springframework.stereotype.Service;
+import com.skills.hub.repository.SubscriptionRepository;
 
 import java.util.List;
 
@@ -11,10 +12,12 @@ import java.util.List;
 public class SkillPackServiceImpl implements SkillPackService {
 	//a private class instance is created to store all the packs and finalized
     private final SkillPackRepository packRepo;
-    
+    private final SubscriptionRepository subscriptionRepo;
     //the pack is given and saved in the class instance
-    public SkillPackServiceImpl(SkillPackRepository packRepo) {
-        this.packRepo = packRepo;
+    public SkillPackServiceImpl(SkillPackRepository packRepo,
+            SubscriptionRepository subscriptionRepo) {
+    	this.packRepo = packRepo;
+    	this.subscriptionRepo = subscriptionRepo;
     }
 
     @Override
@@ -45,7 +48,13 @@ public class SkillPackServiceImpl implements SkillPackService {
 
     @Override
     public void deleteSkillPack(Long id) {
-    	//it deletes the users pack by taking user id
+
+        if (subscriptionRepo.existsBySkillPackId(id)) {
+            throw new RuntimeException(
+                "This Skill Pack has active subscribers and cannot be deleted."
+            );
+        }
+
         packRepo.deleteById(id);
     }
     
