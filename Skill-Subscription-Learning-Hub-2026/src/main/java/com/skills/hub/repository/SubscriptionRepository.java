@@ -26,5 +26,6 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
     List<Subscription> findByUser(User user);
    //Gets whether there is the existing user in the base or not
     Subscription findByUserIdAndSkillPackId(Long userId, Long packId);
-
+   //This gets the existing skill packs to check whether its TRUE or FALSE if its subscribed or not
+    boolean existsBySkillPackId(Long skillPackId);
 }
