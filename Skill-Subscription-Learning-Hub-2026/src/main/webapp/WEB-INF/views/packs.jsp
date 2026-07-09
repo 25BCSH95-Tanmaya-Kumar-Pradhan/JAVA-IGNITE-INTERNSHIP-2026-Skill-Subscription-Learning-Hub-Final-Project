@@ -60,7 +60,17 @@ User - logs in -views packs - selects a plan
 <div class="container">
 
     <h3>All Courses</h3>
+	<c:if test="${not empty success}">
+	    <p style="color:green; font-weight:bold;">
+	        ${success}
+	    </p>
+	</c:if>
 
+	<c:if test="${not empty error}">
+	    <p style="color:red; font-weight:bold;">
+	        ${error}
+	    </p>
+	</c:if>
     <!-- Search Box -->
     <form action="/packs" method="get">
 
