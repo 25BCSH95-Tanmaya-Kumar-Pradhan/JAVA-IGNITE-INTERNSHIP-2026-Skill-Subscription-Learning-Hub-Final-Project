@@ -1,6 +1,7 @@
 package com.skills.hub.controller;
 
 import com.skills.hub.model.SkillPack;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.skills.hub.model.Subscription;
 import com.skills.hub.model.User;
 import com.skills.hub.service.SkillPackService;
@@ -77,12 +78,25 @@ public class SkillPackController {
     }
 
     @GetMapping("/delete-pack/{id}")
-    public String deletePack(@PathVariable Long id) {
+    public String deletePack(@PathVariable Long id,
+                             RedirectAttributes redirectAttributes) {
 
-        packService.deleteSkillPack(id);
+        try {
+
+            packService.deleteSkillPack(id);
+            redirectAttributes.addFlashAttribute("success",
+                    "Skill Pack deleted successfully.");
+
+        } catch (RuntimeException e) {
+
+            redirectAttributes.addFlashAttribute("error",
+                    e.getMessage());
+
+        }
 
         return "redirect:/packs";
     }
+
 
     @PostMapping("/update-pack")
     public String updatePack(@ModelAttribute SkillPack pack) {
